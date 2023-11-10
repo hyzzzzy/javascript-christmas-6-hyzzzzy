@@ -1,11 +1,12 @@
-import { SETTING, ERROR_MESSAGE } from '../constants/message';
+import { ERROR_MESSAGE } from '../constants/message';
+import { SETTING, DATE } from '../constants/setting'; 
 import Util from './Util';
 import { APPETIZER, MAIN, DESSERT, BEVERAGE } from '../constants/menu';
 
 const Validate = {
   isDay(num) {
     num = Number(num);
-    if (num < SETTING.min_day || num > SETTING.max_day) {
+    if (num < DATE.min_day || num > DATE.max_day) {
       throw new Error(ERROR_MESSAGE.not_date);
     }
   },

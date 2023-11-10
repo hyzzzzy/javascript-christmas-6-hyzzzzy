@@ -1,12 +1,4 @@
-export const SETTING = Object.freeze({
-  min_day: 1,
-  min_menu: 1,
-  order_partial_length: 2,
-  month: 12,
-  max_menu: 20,
-  max_day: 31,
-  name: '우테코 식당',
-});
+import { SETTING, DATE } from './setting';
 
 export const FIX = Object.freeze({
   title: (value) => `<${value}>`,
@@ -21,14 +13,14 @@ export const TITLE = Object.freeze({
   benefit: FIX.title('혜택 내역'),
   benefit_price: FIX.title('총혜택 금액'),
   price_after_discount: FIX.title('할인 후 예상 결제 금액'),
-  badge: FIX.title(`${SETTING.month}월 이벤트 배지`),
+  badge: FIX.title(`${DATE.month}월 이벤트 배지`),
 });
 
 export const MESSAGE = Object.freeze({
-  intro: `안녕하세요! ${SETTING.name} ${SETTING.month}월 이벤트 플래너입니다.\n`,
-  input_day: `${SETTING.month}월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n`,
+  intro: `안녕하세요! ${SETTING.name} ${DATE.month}월 이벤트 플래너입니다.\n`,
+  input_day: `${DATE.month}월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n`,
   input_menu: '주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)',
-  preview: (day) => `${SETTING.month}월 ${day}일에 ${SETTING.name}에서 받을 이벤트 혜택 미리 보기!`,
+  preview: (day) => `${DATE.month}월 ${day}일에 ${SETTING.name}에서 받을 이벤트 혜택 미리 보기!`,
   number: '개',
   unit: '원',
   noting: '없음',
