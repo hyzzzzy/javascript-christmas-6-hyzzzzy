@@ -1,6 +1,7 @@
 export const SETTING = Object.freeze({
   min_day: 1,
   min_menu: 1,
+  order_partial_length: 2,
   month: 12,
   max_menu: 20,
   max_day: 31,
