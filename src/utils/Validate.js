@@ -21,62 +21,65 @@ const Validate = {
   hasMenu(orders) {
     const orderArray = Util.parseInputOrder(orders);
   
-    orderArray.forEach((order) => {
-      if (!APPETIZER.hasOwnProperty(order.menu)
-      || !MAIN.hasOwnProperty(order.menu)
-      || !DESSERT.hasOwnProperty(order.menu)
-      || !BEVERAGE.hasOwnProperty(order.menu)) {
+    for (const order of orderArray) {
+      const isAppetizer = Object.keys(APPETIZER).some(key => APPETIZER[key].name === order.menu);
+      const isMain = Object.keys(MAIN).some(key => MAIN[key].name === order.menu);
+      const isDessert = Object.keys(DESSERT).some(key => DESSERT[key].name === order.menu);
+      const isBeverage = Object.keys(BEVERAGE).some(key => BEVERAGE[key].name === order.menu);  
+
+      if (!isAppetizer && !isMain && !isDessert && !isBeverage) {
         throw new Error(ERROR_MESSAGE.not_menu);
       }
-    });
+    }
   },
 
   hasMinQuantity(orders) {
     const orderArray = Util.parseInputOrder(orders);
-
-    orderArray.forEach((order) => {
+    
+    for (const order of orderArray) {
       if (order.quantity < SETTING.min_menu
         || this.isNaturalNumber(order.quantity)) {
         throw new Error(ERROR_MESSAGE.not_menu);
       }
-    });
+    }
   },
 
   isMenuFormat(orders) {
     const orderArray = orders.split(',').map((v) => v.trim());
-    orderArray.forEach((order) => {
+    for (const order of orderArray) {
       const orderDetail = order.split('-');
 
       if (orderDetail.length !== SETTING.order_partial_length) {
         throw new Error(ERROR_MESSAGE.not_menu);
       }
-    });
+    }
   },
 
   isUniqueMenu(orders) {
-    const orderArray = orders.split(',').map((v) => v.trim());
+    const orderArray = Util.parseInputOrder(orders);
     const menuSet = new Set();
 
-    orderArray.forEach((order) => {
-      const [menu] = order;
+    for (const order of orderArray) {
+      const menu = order.menu;
 
       if (menuSet.has(menu)) {
         throw new Error(ERROR_MESSAGE.not_menu);
       }
 
       menuSet.add(menu);
-    });
+    }
   },
 
   isOnlyBeverage(orders) {
-    const orderArray = orders.split(',').map((v) => v.trim());
-    const count = 0;
+    const orderArray = Util.parseInputOrder(orders);
+    let count = 0;
 
-    orderArray.forEach((order) => {
-      if (BEVERAGE.hasOwnProperty(order.menu)) {
+    for (const order of orderArray) {
+      const isBeverage = Object.keys(BEVERAGE).some(key => BEVERAGE[key].name === order.menu); 
+      if (isBeverage) {
         count++;
       }
-    });
+    }
 
     if (count === orderArray.length) {
       throw new Error(ERROR_MESSAGE.only_beverage);
@@ -85,13 +88,13 @@ const Validate = {
 
   isTooManyQuantity(orders) {
     const orderArray = Util.parseInputOrder(orders);
-    const count = 0;
+    let count = 0;
 
-    orderArray.forEach((order) => {
+    for (const order of orderArray) {
       count += order.quantity;
-    });
+    }
 
-    if (count === SETTING.max_menu) {
+    if (count > SETTING.max_menu) {
       throw new Error(ERROR_MESSAGE.too_many_order);
     }
   },
