@@ -7,7 +7,21 @@ const Util = {
     });
   
     Object.freeze(obj);
-  }
+  },
+
+  parseInputOrder(str) {
+    const orderArray = str.split(',');
+  
+    const parseArray = orderArray.map((order) => {
+      const orderDetail = order.trim().split('-');
+      return {
+        menu: orderDetail[0],
+        quantity: Number(orderDetail[1]),
+      };
+    });
+  
+    return parseArray;
+  },
 }
 
 export default Util;
