@@ -1,6 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE } from '../constants/message';
 import Validate from '../utils/Validate';
+import Util from '../utils/Util';
 
 const InputView = {
   async readDay() {
@@ -18,6 +19,7 @@ const InputView = {
     Validate.isUniqueMenu(input);
     Validate.isOnlyBeverage(input);
     Validate.isTooManyQuantity(input);
+    return Util.parseInputOrder(input);
   },
 }
 
