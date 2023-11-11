@@ -4,6 +4,8 @@ export const SPECIAL_DAY = Object.freeze([
   3, 10, 17, 24, 25, 31,
 ]);
 
+export const PRICE_FOR_GIFT = Object.freeze(120000);
+
 export const BADGE = {
   star: { name: '별', price: 5000 },
   tree: { name: '트리', price: 10000 },
