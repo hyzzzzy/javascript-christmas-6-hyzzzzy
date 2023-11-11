@@ -9,6 +9,9 @@ class App {
   async run() {
     OutputView.printIntro();
     await this.makeReservation();
+    OutputView.printPreview(this.#order.date);
+    OutputView.printMenu(this.#order.menu);
+    OutputView.printPriceBeforeDiscount(this.#order);
   }
   
   async makeReservation() {
