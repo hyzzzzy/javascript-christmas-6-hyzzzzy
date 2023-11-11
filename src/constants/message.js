@@ -1,4 +1,5 @@
-import { SETTING, DATE } from './setting';
+import { SETTING } from './setting';
+import { DATE } from './event';
 
 export const FIX = Object.freeze({
   title: (value) => `\n<${value}>`,

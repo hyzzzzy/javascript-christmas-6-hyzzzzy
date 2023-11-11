@@ -1,5 +1,6 @@
 import { ERROR_MESSAGE } from '../constants/message';
-import { SETTING, DATE } from '../constants/setting'; 
+import { SETTING } from '../constants/setting'; 
+import { DATE } from '../constants/event';
 import Util from './Util';
 import { APPETIZER, MAIN, DESSERT, BEVERAGE } from '../constants/menu';
 
