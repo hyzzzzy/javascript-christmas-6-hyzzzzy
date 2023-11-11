@@ -29,8 +29,6 @@ export const MESSAGE = Object.freeze({
 export const ERROR_MESSAGE = Object.freeze({
   not_date: `${FIX.error} 유효하지 않은 날짜입니다. ${FIX.retry}`,
   not_menu: `${FIX.error} 유효하지 않은 주문입니다. ${FIX.retry}`,
-  only_beverage: `${FIX.error} 음료만 주문할 수 없습니다. ${FIX.retry}`,
-  too_many_order: `${FIX.error} 메뉴는 최대 ${SETTING.max_menu}개까지만 주문 가능합니다. ${FIX.retry}`,
 });
 
 export const BENEFIT_MESSAGE = Object.freeze({
