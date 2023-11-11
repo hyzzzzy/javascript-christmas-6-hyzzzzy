@@ -37,8 +37,7 @@ const Validate = {
     const orderArray = Util.parseInputOrder(orders);
     
     for (const order of orderArray) {
-      if (order.quantity < SETTING.min_menu
-        || this.isNaturalNumber(order.quantity)) {
+      if (order.quantity < SETTING.min_menu) {
         throw new Error(ERROR_MESSAGE.not_menu);
       }
     }
@@ -82,7 +81,7 @@ const Validate = {
     }
 
     if (count === orderArray.length) {
-      throw new Error(ERROR_MESSAGE.only_beverage);
+      throw new Error(ERROR_MESSAGE.not_menu);
     }
   },
 
@@ -95,7 +94,7 @@ const Validate = {
     }
 
     if (count > SETTING.max_menu) {
-      throw new Error(ERROR_MESSAGE.too_many_order);
+      throw new Error(ERROR_MESSAGE.not_menu);
     }
   },
 };
