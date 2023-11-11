@@ -1,5 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { MESSAGE, TITLE } from '../constants/message';
+import { BEVERAGE } from '../constants/menu';
+import { SETTING } from '../constants/setting';
 
 const OutputView = {
   printIntro() {
@@ -22,9 +24,16 @@ const OutputView = {
     Console.print(`${order.calculateTotalPrice().toLocaleString()}${MESSAGE.unit}`);
   },
 
-  printGiftMenu() {
+  printGiftMenu(isOverPrice) {
     Console.print(TITLE.gift_menu);
-    // TODO: 증정 메뉴 출력
+
+    if (isOverPrice) {
+      Console.print(`${BEVERAGE.champagne.name} ${SETTING.min_menu}${MESSAGE.number}`);
+    } 
+
+    if (!isOverPrice) {
+      Console.print(`${MESSAGE.noting}`);
+    }
   },
 
   printBenefit() {
