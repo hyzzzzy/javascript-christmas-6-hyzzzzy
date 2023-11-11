@@ -10,14 +10,16 @@ const OutputView = {
     Console.print(MESSAGE.preview(day));
   },
 
-  printMenu() {
+  printMenu(orders) {
     Console.print(TITLE.order_menu);
-    // TODO: 주문 메뉴 출력
+    for (const order of orders) {
+      Console.print(`${order.menu} ${order.quantity}${MESSAGE.number}`);
+    }
   },
 
-  printPriceBeforeDiscount() {
+  printPriceBeforeDiscount(order) {
     Console.print(TITLE.price_before_discount);
-    // TODO: 할인 전 총 주문 금액 출력
+    Console.print(`${order.calculateTotalPrice().toLocaleString()}${MESSAGE.unit}`);
   },
 
   printGiftMenu() {
