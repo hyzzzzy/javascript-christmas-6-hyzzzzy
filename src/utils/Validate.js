@@ -24,7 +24,7 @@ const Validate = {
     const isDessert = Object.keys(DESSERT).some(key => DESSERT[key].name === menu);
     const isBeverage = Object.keys(BEVERAGE).some(key => BEVERAGE[key].name === menu);
   
-    return [isAppetizer, isMain, isDessert, isBeverage];
+    return { isAppetizer, isMain, isDessert, isBeverage };
   },
 
   hasMenuInCategory(menu) {
@@ -33,19 +33,19 @@ const Validate = {
     const dessert = Object.values(DESSERT).find((item) => item.name === menu);
     const beverage = Object.values(BEVERAGE).find((item) => item.name === menu);
 
-    return [appetizer, main, dessert, beverage];
+    return [ appetizer, main, dessert, beverage ];
   },
 
   hasMenu(orders) {
     const orderArray = Util.parseInputOrder(orders);
   
     for (const order of orderArray) {
-      const [
+      const {
         isAppetizer, 
         isMain, 
         isDessert, 
         isBeverage
-      ] = this.isMenuInCategory(order.menu);
+       } = this.isMenuInCategory(order.menu);
 
       if (!isAppetizer && !isMain && !isDessert && !isBeverage) {
         throw new Error(ERROR_MESSAGE.not_menu);
@@ -68,7 +68,8 @@ const Validate = {
     for (const order of orderArray) {
       const orderDetail = order.split('-');
 
-      if (orderDetail.length !== SETTING.order_partial_length) {
+      if (orderDetail.length !== SETTING.order_partial_length
+        || isNaN(orderDetail[1])) {
         throw new Error(ERROR_MESSAGE.not_menu);
       }
     }
@@ -94,7 +95,7 @@ const Validate = {
     let count = 0;
 
     for (const order of orderArray) {
-      const [isBeverage] = this.isMenuInCategory(order.menu); 
+      const { isBeverage } = this.isMenuInCategory(order.menu);
       if (isBeverage) {
         count++;
       }
