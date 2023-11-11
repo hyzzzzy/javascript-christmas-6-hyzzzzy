@@ -18,14 +18,34 @@ const Validate = {
     }
   },
 
+  isMenuInCategory(menu) {
+    const isAppetizer = Object.keys(APPETIZER).some(key => APPETIZER[key].name === menu);
+    const isMain = Object.keys(MAIN).some(key => MAIN[key].name === menu);
+    const isDessert = Object.keys(DESSERT).some(key => DESSERT[key].name === menu);
+    const isBeverage = Object.keys(BEVERAGE).some(key => BEVERAGE[key].name === menu);
+  
+    return [isAppetizer, isMain, isDessert, isBeverage];
+  },
+
+  hasMenuInCategory(menu) {
+    const appetizer = Object.values(APPETIZER).find((item) => item.name === menu);
+    const main = Object.values(MAIN).find((item) => item.name === menu);
+    const dessert = Object.values(DESSERT).find((item) => item.name === menu);
+    const beverage = Object.values(BEVERAGE).find((item) => item.name === menu);
+
+    return [appetizer, main, dessert, beverage];
+  },
+
   hasMenu(orders) {
     const orderArray = Util.parseInputOrder(orders);
   
     for (const order of orderArray) {
-      const isAppetizer = Object.keys(APPETIZER).some(key => APPETIZER[key].name === order.menu);
-      const isMain = Object.keys(MAIN).some(key => MAIN[key].name === order.menu);
-      const isDessert = Object.keys(DESSERT).some(key => DESSERT[key].name === order.menu);
-      const isBeverage = Object.keys(BEVERAGE).some(key => BEVERAGE[key].name === order.menu);  
+      const [
+        isAppetizer, 
+        isMain, 
+        isDessert, 
+        isBeverage
+      ] = this.isMenuInCategory(order.menu);
 
       if (!isAppetizer && !isMain && !isDessert && !isBeverage) {
         throw new Error(ERROR_MESSAGE.not_menu);
@@ -74,7 +94,7 @@ const Validate = {
     let count = 0;
 
     for (const order of orderArray) {
-      const isBeverage = Object.keys(BEVERAGE).some(key => BEVERAGE[key].name === order.menu); 
+      const [isBeverage] = this.isMenuInCategory(order.menu); 
       if (isBeverage) {
         count++;
       }
