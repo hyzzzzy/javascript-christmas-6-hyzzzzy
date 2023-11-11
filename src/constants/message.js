@@ -1,7 +1,7 @@
 import { SETTING, DATE } from './setting';
 
 export const FIX = Object.freeze({
-  title: (value) => `<${value}>`,
+  title: (value) => `\n<${value}>`,
   error: '[ERROR]',
   retry: '다시 입력해 주세요.',
 });
