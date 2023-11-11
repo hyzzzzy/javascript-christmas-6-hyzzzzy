@@ -9,18 +9,22 @@ class App {
   #promotion;
 
   async run() {
-    OutputView.printIntro();
-    await this.makeReservation();
-    OutputView.printPreview(this.#order.date);
-    OutputView.printMenu(this.#order.menu);
-    OutputView.printPriceBeforeDiscount(this.#order);
+    await this.readOrder();
+    this.printOrderList();
     this.printGiftList();
   }
   
-  async makeReservation() {
+  async readOrder() {
+    OutputView.printIntro();
     const day = await this.readUserInput(InputView.readDay);
     const menu = await this.readUserInput(InputView.readMenu);
     this.#order = new Order(day, menu);
+    OutputView.printPreview(this.#order.date);
+  }
+  
+  printOrderList() {
+    OutputView.printMenu(this.#order.menu);
+    OutputView.printPriceBeforeDiscount(this.#order);
   }
 
   printGiftList() {
