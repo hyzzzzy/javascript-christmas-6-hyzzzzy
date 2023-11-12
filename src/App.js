@@ -12,6 +12,7 @@ class App {
     await this.readOrder();
     this.printOrderList();
     this.printGiftList();
+    this.printBenefitList();
   }
   
   async readOrder() {
@@ -32,6 +33,17 @@ class App {
     const price = this.#order.calculateTotalPrice();
     const isOverPrice = this.#promotion.calculateGiftEvent(price);
     OutputView.printGiftMenu(isOverPrice);
+  }
+
+  printBenefitList() {
+    const price = this.#order.calculateTotalPrice();
+    const dDay = this.#promotion.calculateDDay(price, this.#order.date);
+    const weekday = this.#promotion.calculateWeekday(this.#order.date, this.#order.menu);
+    const weekend = this.#promotion.calculateWeekend(this.#order.date, this.#order.menu);
+    const special = this.#promotion.calculateSpecialDay(this.#order.date);
+    const gift = this.#promotion.calculateGiftPrice(price);
+
+    OutputView.printAllBenefit(dDay, weekday, weekend, special, gift);
   }
 
   async readUserInput(inputFunction, functionParameter) {
