@@ -8,7 +8,7 @@ export const FIX = Object.freeze({
 });
 
 export const TITLE = Object.freeze({
-  order_menu: FIX.title('주문메뉴'),
+  order_menu: FIX.title('주문 메뉴'),
   price_before_discount: FIX.title('할인 전 총주문 금액'),
   gift_menu: FIX.title('증정 메뉴'),
   benefit: FIX.title('혜택 내역'),
