@@ -42,8 +42,14 @@ class App {
     const weekend = this.#promotion.calculateWeekend(this.#order.date, this.#order.menu);
     const special = this.#promotion.calculateSpecialDay(this.#order.date);
     const gift = this.#promotion.calculateGiftPrice(price);
+    const totalBenefit = this.#promotion.calculateTotalBenefit(dDay, weekday, weekend, special, gift);
+    const expectedAmount = this.#order.calculateExpectedAmount(totalBenefit);
+    const badge = this.#promotion.calculateEventBadge(totalBenefit);
 
     OutputView.printAllBenefit(dDay, weekday, weekend, special, gift);
+    OutputView.printBenefitPrice(totalBenefit);
+    OutputView.printPriceAfterDiscount(expectedAmount);
+    OutputView.printBadge(badge);
   }
 
   async readUserInput(inputFunction, functionParameter) {
