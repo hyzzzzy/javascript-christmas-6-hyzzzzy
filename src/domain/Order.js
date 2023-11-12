@@ -37,6 +37,11 @@ class Order {
     }
     return price;
   }
+
+  calculateExpectedAmount(totalBenefit) {
+    const price = this.calculateTotalPrice();
+    return price + totalBenefit;
+  }
 }
 
 export default Order;
