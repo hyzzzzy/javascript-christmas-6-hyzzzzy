@@ -79,19 +79,33 @@ const OutputView = {
     }
   },
 
-  printBenefitPrice() {
+  printBenefitPrice(price) {
     Console.print(TITLE.benefit_price);
-    // TODO: 총혜택 금액 출력
+
+    if (price) {
+      Console.print(`${price.toLocaleString()}${MESSAGE.unit}`);
+    }
+
+    if (!price) {
+      Console.print(MESSAGE.noting);
+    }
   },
 
-  printPriceAfterDiscount() {
+  printPriceAfterDiscount(price) {
     Console.print(TITLE.price_after_discount);
-    // TODO: 할인 후 예상 결제 금액 출력
+    Console.print(`${price.toLocaleString()}${MESSAGE.unit}`);
   },
 
-  printBadge() {
-    Console.log(TITLE.badge);
-    // TODO: 이벤트 배지 출력
+  printBadge(name) {
+    Console.print(TITLE.badge);
+
+    if (name) {
+      Console.print(name);
+    }
+
+    if (!name) {
+      Console.print(MESSAGE.noting);
+    }
   },
 }
 
