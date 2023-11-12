@@ -12,7 +12,7 @@ class Promotion {
 
   calculateDDay(price, day) {
     let discount = 0;
-    if (price < PRICE.for_benefit) {
+    if (price < PRICE.for_benefit || day > DATE.christmas) {
       return 0;
     }
 
