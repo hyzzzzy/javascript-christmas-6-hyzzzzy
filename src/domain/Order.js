@@ -1,4 +1,4 @@
-import Validate from '../utils/Validate';
+import Util from '../utils/Util';
 
 class Order {
   #date;
@@ -33,7 +33,7 @@ class Order {
     for (const order of this.#menu) {
       const { 
         appetizer, main, dessert, beverage 
-      } = Validate.hasMenuInCategory(order.menu);
+      } = Util.hasMenuInCategory(order.menu);
 
       price += this.calculatePrice(appetizer, order.quantity);
       price += this.calculatePrice(main, order.quantity);

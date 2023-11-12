@@ -1,6 +1,6 @@
 import { BADGE, DATE, PRICE, SPECIAL_DAY } from '../constants/event';
 import { BEVERAGE } from '../constants/menu';
-import Validate from '../utils/Validate';
+import Util from '../utils/Util';
 
 class Promotion {
   calculateGiftEvent(price) {
@@ -33,7 +33,7 @@ class Promotion {
     }
 
     for (const order of orders) {
-      const { dessert } = Validate.hasMenuInCategory(order.menu);
+      const { dessert } = Util.hasMenuInCategory(order.menu);
 
       if (dessert) {
         discount += order.quantity * DATE.year;
@@ -53,7 +53,7 @@ class Promotion {
     }
 
     for (const order of orders) {
-      const { main } = Validate.hasMenuInCategory(order.menu);
+      const { main } = Util.hasMenuInCategory(order.menu);
       
       if (main) {
         discount += order.quantity * DATE.year;

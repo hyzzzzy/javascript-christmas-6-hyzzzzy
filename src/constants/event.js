@@ -1,4 +1,4 @@
-import Util from '../utils/Util';
+import ConstantsUtil from '../utils/ConstantsUtil';
 
 export const DATE = Object.freeze({
   min_day: 1,
@@ -26,4 +26,4 @@ export const BADGE = [
   { name: '트리', price: 10000 },
   { name: '산타', price: 20000 },
 ];
-Util.deepFreeze(BADGE);
+ConstantsUtil.deepFreeze(BADGE);
