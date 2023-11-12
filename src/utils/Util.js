@@ -14,6 +14,7 @@ const Util = {
   
     const parseArray = orderArray.map((order) => {
       const orderDetail = order.trim().split('-');
+      
       return {
         menu: orderDetail[0],
         quantity: Number(orderDetail[1]),

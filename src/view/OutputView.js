@@ -14,6 +14,7 @@ const OutputView = {
 
   printMenu(orders) {
     Console.print(TITLE.order_menu);
+    
     for (const order of orders) {
       Console.print(`${order.menu} ${order.quantity}${MESSAGE.number}`);
     }
@@ -68,6 +69,7 @@ const OutputView = {
 
   printAllBenefit(dDay, weekday, weekend, special, gift) {
     Console.print(TITLE.benefit);
+
     this.printDDayDiscount(dDay);
     this.printWeekdayDiscount(weekday);
     this.printWeekendDiscount(weekend);

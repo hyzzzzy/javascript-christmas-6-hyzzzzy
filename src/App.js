@@ -19,9 +19,12 @@ class App {
   
   async readOrder() {
     OutputView.printIntro();
+
     const day = await this.readUserInput(InputView.readDay);
     const menu = await this.readUserInput(InputView.readMenu);
+
     this.#order = new Order(day, menu);
+
     OutputView.printPreview(this.#order.date);
   }
   
@@ -32,8 +35,10 @@ class App {
 
   printGiftList() {
     this.#promotion = new Promotion();
+
     const price = this.#order.calculateTotalPrice();
     const isOverPrice = this.#promotion.calculateGiftEvent(price);
+    
     OutputView.printGiftMenu(isOverPrice);
   }
   

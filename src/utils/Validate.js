@@ -7,6 +7,7 @@ import { APPETIZER, MAIN, DESSERT, BEVERAGE } from '../constants/menu';
 const Validate = {
   isDay(num) {
     num = Number(num);
+
     if (num < DATE.min_day || num > DATE.max_day) {
       throw new Error(ERROR_MESSAGE.not_date);
     }
@@ -14,6 +15,7 @@ const Validate = {
 
   isNaturalNumber(num) {
     num = Number(num);
+
     if (num <= 0 || num !== Math.floor(num)) {
       throw new Error(ERROR_MESSAGE.not_date);
     }
@@ -42,10 +44,7 @@ const Validate = {
   
     for (const order of orderArray) {
       const {
-        isAppetizer, 
-        isMain, 
-        isDessert, 
-        isBeverage
+        isAppetizer, isMain, isDessert, isBeverage
        } = this.isMenuInCategory(order.menu);
 
       if (!isAppetizer && !isMain && !isDessert && !isBeverage) {
@@ -66,6 +65,7 @@ const Validate = {
 
   isMenuFormat(orders) {
     const orderArray = orders.split(',').map((v) => v.trim());
+    
     for (const order of orderArray) {
       const orderDetail = order.split('-');
 
@@ -97,6 +97,7 @@ const Validate = {
 
     for (const order of orderArray) {
       const { isBeverage } = this.isMenuInCategory(order.menu);
+      
       if (isBeverage) {
         count++;
       }

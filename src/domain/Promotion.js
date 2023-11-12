@@ -13,6 +13,7 @@ class Promotion {
 
   calculateDDay(price, day) {
     let discount = 0;
+
     if (price < PRICE.for_benefit || day > DATE.christmas) {
       return 0;
     }
@@ -33,6 +34,7 @@ class Promotion {
 
     for (const order of orders) {
       const { dessert } = Validate.hasMenuInCategory(order.menu);
+
       if (dessert) {
         discount += order.quantity * DATE.year;
       }
@@ -52,6 +54,7 @@ class Promotion {
 
     for (const order of orders) {
       const { main } = Validate.hasMenuInCategory(order.menu);
+      
       if (main) {
         discount += order.quantity * DATE.year;
       }
