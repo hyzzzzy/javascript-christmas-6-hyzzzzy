@@ -9,7 +9,7 @@ Util.deepFreeze(APPETIZER);
 
 export const MAIN = {
   t_bone_steak: { name: '티본스테이크', price: 55000 },
-  bbq_ribs: { name: '바베큐립', price: 54000 },
+  bbq_ribs: { name: '바비큐립', price: 54000 },
   seafood_pasta: { name: '해산물파스타', price: 35000 },
   christmas_pasta: { name: '크리스마스파스타', price: 25000 },
 };
