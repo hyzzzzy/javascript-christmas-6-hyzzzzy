@@ -8,6 +8,10 @@ export const DATE = Object.freeze({
   year: 2023,
 });
 
+export const WEEKEND = Object.freeze([
+  5, 6,
+]);
+
 export const SPECIAL_DAY = Object.freeze([
   3, 10, 17, 24, 25, 31,
 ]);

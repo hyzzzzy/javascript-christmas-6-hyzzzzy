@@ -1,4 +1,4 @@
-import { BADGE, DATE, PRICE, SPECIAL_DAY } from '../constants/event';
+import { BADGE, DATE, PRICE, SPECIAL_DAY, WEEKEND } from '../constants/event';
 import { BEVERAGE } from '../constants/menu';
 import Util from '../utils/Util';
 
@@ -25,7 +25,7 @@ class Promotion {
     const reservationDate = new Date(DATE.year, DATE.month - 1, date);
     const day = reservationDate.getDay();
     
-    if (day === 5 || day === 6) {
+    if (WEEKEND.includes(day)) {
       return 0;
     }
     
@@ -46,7 +46,7 @@ class Promotion {
     const reservationDate = new Date(DATE.year, DATE.month - 1, date);
     const day = reservationDate.getDay();
     
-    if (day !== 5 && day !== 6) {
+    if (!WEEKEND.includes(day)) {
       return 0;
     }
     
