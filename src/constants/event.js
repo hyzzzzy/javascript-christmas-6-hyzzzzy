@@ -3,6 +3,7 @@ import Util from '../utils/Util';
 export const DATE = Object.freeze({
   min_day: 1,
   month: 12,
+  christmas: 25,
   max_day: 31,
   year: 2023,
 });
@@ -20,9 +21,9 @@ export const PRICE = Object.freeze({
   for_special: 1000,
 });
 
-export const BADGE = {
-  star: { name: '별', price: 5000 },
-  tree: { name: '트리', price: 10000 },
-  santa: { name: '산타', price: 20000 },
-};
+export const BADGE = [
+  { name: '별', price: 5000 },
+  { name: '트리', price: 10000 },
+  { name: '산타', price: 20000 },
+];
 Util.deepFreeze(BADGE);
