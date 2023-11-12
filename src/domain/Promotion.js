@@ -7,7 +7,7 @@ class Promotion {
     if (price > PRICE.for_gift) {
       return true;
     }
-    
+
     return false;
   }
 
@@ -91,6 +91,17 @@ class Promotion {
     }
 
     return false;
+  }
+
+  getAllBenefits(price, date, menu) {
+    const dDay = this.calculateDDay(price, date);
+    const weekday = this.calculateWeekday(date, menu);
+    const weekend = this.calculateWeekend(date, menu);
+    const special = this.calculateSpecialDay(date);
+    const gift = this.calculateGiftPrice(price);
+    const totalBenefit = this.calculateTotalBenefit(dDay, weekday, weekend, special, gift);
+
+    return { dDay, weekday, weekend, special, gift, totalBenefit };
   }
 }
 
