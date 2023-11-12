@@ -13,6 +13,8 @@ class App {
     this.printOrderList();
     this.printGiftList();
     this.printBenefitList();
+    this.printTotalPrice();
+    this.printEventBadge();
   }
   
   async readOrder() {
@@ -34,21 +36,30 @@ class App {
     const isOverPrice = this.#promotion.calculateGiftEvent(price);
     OutputView.printGiftMenu(isOverPrice);
   }
-
+  
   printBenefitList() {
     const price = this.#order.calculateTotalPrice();
-    const dDay = this.#promotion.calculateDDay(price, this.#order.date);
-    const weekday = this.#promotion.calculateWeekday(this.#order.date, this.#order.menu);
-    const weekend = this.#promotion.calculateWeekend(this.#order.date, this.#order.menu);
-    const special = this.#promotion.calculateSpecialDay(this.#order.date);
-    const gift = this.#promotion.calculateGiftPrice(price);
-    const totalBenefit = this.#promotion.calculateTotalBenefit(dDay, weekday, weekend, special, gift);
-    const expectedAmount = this.#order.calculateExpectedAmount(totalBenefit);
-    const badge = this.#promotion.calculateEventBadge(totalBenefit);
-
+    const { 
+      dDay, weekday, weekend, special, gift
+    } = this.#promotion.getAllBenefits(price, this.#order.date, this.#order.menu);
+    
     OutputView.printAllBenefit(dDay, weekday, weekend, special, gift);
+  }
+  
+  printTotalPrice() {
+    const price = this.#order.calculateTotalPrice();
+    const { totalBenefit } = this.#promotion.getAllBenefits(price, this.#order.date, this.#order.menu);
+    const expectedAmount = this.#order.calculateExpectedAmount(totalBenefit);
+    
     OutputView.printBenefitPrice(totalBenefit);
     OutputView.printPriceAfterDiscount(expectedAmount);
+  }
+  
+  printEventBadge() {
+    const price = this.#order.calculateTotalPrice();
+    const { totalBenefit } = this.#promotion.getAllBenefits(price, this.#order.date, this.#order.menu);
+    const badge = this.#promotion.calculateEventBadge(totalBenefit);
+
     OutputView.printBadge(badge);
   }
 
