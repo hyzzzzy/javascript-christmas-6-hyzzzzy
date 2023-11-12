@@ -1,10 +1,10 @@
 import ConstantsUtil from '../utils/ConstantsUtil';
 
 export const DATE = Object.freeze({
-  min_day: 1,
+  min_date: 1,
   month: 12,
   christmas: 25,
-  max_day: 31,
+  max_date: 31,
   year: 2023,
 });
 

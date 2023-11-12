@@ -4,8 +4,8 @@ class Order {
   #date;
   #menu;
   
-  constructor(day, menu) {
-    this.#date = day;
+  constructor(date, menu) {
+    this.#date = date;
     this.#menu = menu;
   }
 
@@ -18,13 +18,11 @@ class Order {
   }
 
   calculatePrice(category, quantity) {
-    let price = 0;
-
-    if (category) {
-      price += category.price * quantity;
+    if (!category) {
+      return 0;
     }
 
-    return price;
+    return category.price * quantity;
   }
 
   calculateTotalPrice() {

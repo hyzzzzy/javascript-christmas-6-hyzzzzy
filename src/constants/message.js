@@ -19,9 +19,9 @@ export const TITLE = Object.freeze({
 
 export const MESSAGE = Object.freeze({
   intro: `안녕하세요! ${SETTING.name} ${DATE.month}월 이벤트 플래너입니다.\n`,
-  input_day: `${DATE.month}월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n`,
+  input_date: `${DATE.month}월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)\n`,
   input_menu: '주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)',
-  preview: (day) => `${DATE.month}월 ${day}일에 ${SETTING.name}에서 받을 이벤트 혜택 미리 보기!`,
+  preview: (date) => `${DATE.month}월 ${date}일에 ${SETTING.name}에서 받을 이벤트 혜택 미리 보기!`,
   number: '개',
   unit: '원',
   noting: '없음',

@@ -2,10 +2,10 @@ import { ERROR_MESSAGE } from '../constants/message';
 import { DATE } from '../constants/event';
 
 const DateValidator = {
-  isDay(input) {
+  isDate(input) {
     const num = Number(input);
 
-    if (num < DATE.min_day || num > DATE.max_day) {
+    if (num < DATE.min_date || num > DATE.max_date) {
       throw new Error(ERROR_MESSAGE.not_date);
     }
   },

@@ -4,8 +4,8 @@ import Validator from '../utils/Validator';
 import Util from '../utils/Util';
 
 const InputView = {
-  async readDay() {
-    const input = await Console.readLineAsync(MESSAGE.input_day);
+  async readDate() {
+    const input = await Console.readLineAsync(MESSAGE.input_date);
 
     Validator.validateDate(input);
 

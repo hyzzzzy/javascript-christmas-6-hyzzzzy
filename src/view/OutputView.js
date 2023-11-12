@@ -8,8 +8,8 @@ const OutputView = {
     Console.print(MESSAGE.intro);
   },
 
-  printPreview(day) {
-    Console.print(MESSAGE.preview(day));
+  printPreview(date) {
+    Console.print(MESSAGE.preview(date));
   },
 
   printMenu(orders) {

@@ -3,7 +3,7 @@ import MenuValidator from './MenuValidator';
 
 const Validator = {
   validateDate(input) {
-    DateValidator.isDay(input);
+    DateValidator.isDate(input);
     DateValidator.isNaturalNumber(input);
   },
 

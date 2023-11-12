@@ -11,26 +11,25 @@ class Promotion {
     return false;
   }
 
-  calculateDDay(price, day) {
-    let discount = 0;
-
-    if (price < PRICE.for_benefit || day > DATE.christmas) {
+  calculateDDay(price, date) {
+    if (price < PRICE.for_benefit || date > DATE.christmas) {
       return 0;
     }
 
-    discount = PRICE.for_d_day_init + (day - 1) * PRICE.for_d_day_increase;
+    let discount = PRICE.for_d_day_init + (date - 1) * PRICE.for_d_day_increase;
 
     return discount * (-1);
   }
 
   calculateWeekday(date, orders) {
-    let discount = 0;
     const reservationDate = new Date(DATE.year, DATE.month - 1, date);
     const day = reservationDate.getDay();
-
+    
     if (day === 5 || day === 6) {
       return 0;
     }
+    
+    let discount = 0;
 
     for (const order of orders) {
       const { dessert } = Util.hasMenuInCategory(order.menu);
@@ -44,13 +43,14 @@ class Promotion {
   }
 
   calculateWeekend(date, orders) {
-    let discount = 0;
     const reservationDate = new Date(DATE.year, DATE.month - 1, date);
     const day = reservationDate.getDay();
-
+    
     if (day !== 5 && day !== 6) {
       return 0;
     }
+    
+    let discount = 0;
 
     for (const order of orders) {
       const { main } = Util.hasMenuInCategory(order.menu);

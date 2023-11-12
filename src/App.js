@@ -20,10 +20,10 @@ class App {
   async readOrder() {
     OutputView.printIntro();
 
-    const day = await this.readUserInput(InputView.readDay);
+    const date = await this.readUserInput(InputView.readDate);
     const menu = await this.readUserInput(InputView.readMenu);
 
-    this.#order = new Order(day, menu);
+    this.#order = new Order(date, menu);
 
     OutputView.printPreview(this.#order.date);
   }
