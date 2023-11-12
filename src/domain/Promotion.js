@@ -1,4 +1,4 @@
-import { DATE, PRICE, SPECIAL_DAY } from '../constants/event';
+import { BADGE, DATE, PRICE, SPECIAL_DAY } from '../constants/event';
 import { BEVERAGE } from '../constants/menu';
 import Validate from '../utils/Validate';
 
@@ -7,6 +7,7 @@ class Promotion {
     if (price > PRICE.for_gift) {
       return true;
     }
+    
     return false;
   }
 
@@ -75,6 +76,21 @@ class Promotion {
     }
 
     return 0;
+  }
+
+  calculateTotalBenefit(dDay, weekday, weekend, special, gift) {
+    return dDay + weekday + weekend + special + gift;
+  }
+
+  calculateEventBadge(price) {
+    const sortedBadges = BADGE.slice().sort((a, b) => b.price - a.price);
+    const badge = sortedBadges.find(b => Math.abs(price) >= b.price);
+
+    if (badge) {
+      return badge.name;
+    }
+
+    return false;
   }
 }
 
