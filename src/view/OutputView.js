@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE, TITLE } from '../constants/message';
+import { BENEFIT_MESSAGE, MESSAGE, TITLE } from '../constants/message';
 import { BEVERAGE } from '../constants/menu';
 import { SETTING } from '../constants/setting';
 
@@ -36,9 +36,47 @@ const OutputView = {
     }
   },
 
-  printBenefit() {
+  printDDayDiscount(dDay) {
+    if (dDay) {
+      Console.print(BENEFIT_MESSAGE.christmas_d_day_discount(dDay.toLocaleString()));
+    }
+  },
+
+  printWeekdayDiscount(weekday) {
+    if (weekday) {
+      Console.print(BENEFIT_MESSAGE.weekday_discount(weekday.toLocaleString()));
+    }
+  },
+  
+  printWeekendDiscount(weekend) {
+    if (weekend) {
+      Console.print(BENEFIT_MESSAGE.weekend_discount(weekend.toLocaleString()));
+    }
+  },
+
+  printSpecialDayDiscount(special) {
+    if (special) {
+      Console.print(BENEFIT_MESSAGE.special_discount(special.toLocaleString()));
+    }
+  },
+
+  printGiftDiscount(gift) {
+    if (gift) {
+      Console.print(BENEFIT_MESSAGE.gift_event(gift.toLocaleString()));
+    }
+  },
+
+  printAllBenefit(dDay, weekday, weekend, special, gift) {
     Console.print(TITLE.benefit);
-    // TODO: 혜택 내역 출력
+    this.printDDayDiscount(dDay);
+    this.printWeekdayDiscount(weekday);
+    this.printWeekendDiscount(weekend);
+    this.printSpecialDayDiscount(special);
+    this.printGiftDiscount(gift);
+
+    if (!dDay && !weekday && !weekend && !special && !gift) {
+      Console.print(MESSAGE.noting);
+    }
   },
 
   printBenefitPrice() {
