@@ -34,7 +34,7 @@ const Validate = {
     const dessert = Object.values(DESSERT).find((item) => item.name === menu);
     const beverage = Object.values(BEVERAGE).find((item) => item.name === menu);
 
-    return [ appetizer, main, dessert, beverage ];
+    return { appetizer, main, dessert, beverage };
   },
 
   hasMenu(orders) {

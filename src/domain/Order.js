@@ -28,7 +28,7 @@ class Order {
   calculateTotalPrice() {
     let price = 0;
     for (const order of this.#menu) {
-      const [appetizer, main, dessert, beverage] = Validate.hasMenuInCategory(order.menu);
+      const { appetizer, main, dessert, beverage } = Validate.hasMenuInCategory(order.menu);
 
       price += this.calculatePrice(appetizer, order.quantity);
       price += this.calculatePrice(main, order.quantity);
