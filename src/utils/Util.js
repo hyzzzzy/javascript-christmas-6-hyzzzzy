@@ -5,7 +5,7 @@ const Util = {
     const orderArray = str.split(',');
 
     const parseArray = orderArray.map((order) => {
-      const orderDetail = order.trim().split('-');
+      const orderDetail = order.split('-');
       
       return {
         menu: orderDetail[0],
