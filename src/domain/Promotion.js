@@ -21,46 +21,38 @@ class Promotion {
     return discount * (-1);
   }
 
-  calculateWeekday(date, orders) {
-    const reservationDate = new Date(DATE.year, DATE.month - 1, date);
-    const day = reservationDate.getDay();
-    
-    if (WEEKEND.includes(day)) {
-      return 0;
+  calculateCategoryDiscount(order, category, discount) {
+    if (category) {
+      discount += order.quantity * DATE.year;
     }
     
-    let discount = 0;
+    return discount;
+  }
 
-    for (const order of orders) {
+  calculateWeekday(date, orders) {
+    const orderDate = new Date(DATE.year, DATE.month - 1, date);
+    const day = orderDate.getDay();
+    
+    if (WEEKEND.includes(day)) return 0;
+
+    return orders.reduce((discount, order) => {
       const { dessert } = Util.hasMenuInCategory(order.menu);
 
-      if (dessert) {
-        discount += order.quantity * DATE.year;
-      }
-    }
-
-    return discount * (-1);
+      return this.calculateCategoryDiscount(order, dessert, discount);
+    }, 0) * (-1);
   }
 
   calculateWeekend(date, orders) {
-    const reservationDate = new Date(DATE.year, DATE.month - 1, date);
-    const day = reservationDate.getDay();
+    const orderDate = new Date(DATE.year, DATE.month - 1, date);
+    const day = orderDate.getDay();
     
-    if (!WEEKEND.includes(day)) {
-      return 0;
-    }
+    if (!WEEKEND.includes(day)) return 0;
     
-    let discount = 0;
-
-    for (const order of orders) {
+    return orders.reduce((discount, order) => {
       const { main } = Util.hasMenuInCategory(order.menu);
-      
-      if (main) {
-        discount += order.quantity * DATE.year;
-      }
-    }
 
-    return discount * (-1);
+      return this.calculateCategoryDiscount(order, main, discount);
+    }, 0) * (-1);
   }
 
   calculateSpecialDay(date) {
@@ -96,7 +88,7 @@ class Promotion {
     return false;
   }
 
-  getAllBenefits(price, date, menu) {
+  calculateAllBenefits(price, date, menu) {
     const dDay = this.calculateDDay(price, date);
     const weekday = this.calculateWeekday(date, menu);
     const weekend = this.calculateWeekend(date, menu);
