@@ -46,14 +46,14 @@ class App {
     const price = this.#order.calculateTotalPrice();
     const { 
       dDay, weekday, weekend, special, gift
-    } = this.#promotion.getAllBenefits(price, this.#order.date, this.#order.menu);
+    } = this.#promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
     
     OutputView.printAllBenefit(dDay, weekday, weekend, special, gift);
   }
   
   printTotalPrice() {
     const price = this.#order.calculateTotalPrice();
-    const { totalBenefit } = this.#promotion.getAllBenefits(price, this.#order.date, this.#order.menu);
+    const { totalBenefit } = this.#promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
     const expectedAmount = this.#order.calculateExpectedAmount(totalBenefit);
     
     OutputView.printBenefitPrice(totalBenefit);
@@ -62,7 +62,7 @@ class App {
   
   printEventBadge() {
     const price = this.#order.calculateTotalPrice();
-    const { totalBenefit } = this.#promotion.getAllBenefits(price, this.#order.date, this.#order.menu);
+    const { totalBenefit } = this.#promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
     const badge = this.#promotion.calculateEventBadge(totalBenefit);
 
     OutputView.printBadge(badge);
