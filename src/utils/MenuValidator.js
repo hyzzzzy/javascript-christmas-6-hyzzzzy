@@ -38,15 +38,10 @@ const MenuValidator = {
   },
 
   isMenuFormat(orders) {
-    const orderArray = orders.split(',').map((v) => v.trim());
-    
-    for (const order of orderArray) {
-      const orderDetail = order.split('-');
+     const orderRegex = /^([가-힣]+-[1-9][0-9]*)(?:,([가-힣]+-[1-9][0-9]*))*$/;
 
-      if (orderDetail.length !== SETTING.order_partial_length
-        || isNaN(orderDetail[1])) {
-        throw new Error(ERROR_MESSAGE.not_menu);
-      }
+    if (!orderRegex.test(orders)) {
+      throw new Error(ERROR_MESSAGE.not_menu);
     }
   },
 
