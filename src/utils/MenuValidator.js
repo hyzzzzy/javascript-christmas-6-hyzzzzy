@@ -71,7 +71,7 @@ const MenuValidator = {
     const totalQuantity = orderArray.reduce((total, order) => total + order.quantity, 0);
 
     if (totalQuantity > SETTING.max_menu) {
-      throw new Error(ERROR_MESSAGE.too_many_quantity);
+      throw new Error(ERROR_MESSAGE.not_menu);
     }
   },
 }
