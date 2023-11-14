@@ -3,14 +3,14 @@ import MenuValidator from './MenuValidator';
 
 const Validator = {
   validateDate(input) {
-    DateValidator.isDate(input);
     DateValidator.isNaturalNumber(input);
+    DateValidator.isDate(input);
   },
 
   validateMenu(input) {
+    MenuValidator.isMenuFormat(input); 
     MenuValidator.hasMenu(input);
     MenuValidator.hasMinQuantity(input);
-    MenuValidator.isMenuFormat(input);
     MenuValidator.isUniqueMenu(input);
     MenuValidator.isOnlyBeverage(input);
     MenuValidator.isTooManyQuantity(input);
