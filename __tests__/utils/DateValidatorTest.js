@@ -11,7 +11,7 @@ describe('날짜 유효성 유틸함수 테스트', () => {
   });
 
   test.each([
-    0, 100, -10
+    0, 100, -10,
   ])('1 미만 31 초과의 숫자라면 에러를 반환해야 한다.', (input) => {
     const result = () => DateValidator.isDate(input);
 
@@ -19,7 +19,7 @@ describe('날짜 유효성 유틸함수 테스트', () => {
   });
 
   test.each([
-    1.1, 1/100, -10.3
+    1.1, 1/100, -10.3, 'a', 'woowa'
   ])('자연수가 아니라면 에러를 반환해야 한다.', (input) => {
     const result = () => DateValidator.isNaturalNumber(input);
 
