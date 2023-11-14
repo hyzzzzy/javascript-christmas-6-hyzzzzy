@@ -4,7 +4,7 @@ import Util from '../utils/Util';
 
 class Promotion {
   calculateGiftEvent(price) {
-    if (price > PRICE.for_gift) {
+    if (price >= PRICE.for_gift) {
       return true;
     }
 
@@ -16,49 +16,53 @@ class Promotion {
       return 0;
     }
 
-    let discount = PRICE.for_d_day_init + (date - 1) * PRICE.for_d_day_increase;
+    const discount = PRICE.for_d_day_init + (date - 1) * PRICE.for_d_day_increase;
 
     return discount * (-1);
   }
 
-  calculateCategoryDiscount(order, category, discount) {
+  calculateCategoryDiscount(quantity, category, discount) {
     if (category) {
-      discount += order.quantity * DATE.year;
+      discount += quantity * DATE.year;
     }
     
     return discount;
   }
 
-  calculateWeekday(date, orders) {
+  calculateWeekday(date, orders, price) {
     const orderDate = new Date(DATE.year, DATE.month - 1, date);
     const day = orderDate.getDay();
     
-    if (WEEKEND.includes(day)) return 0;
+    if (price < PRICE.for_benefit || WEEKEND.includes(day)) {
+      return 0;
+    }
 
     return orders.reduce((discount, order) => {
       const { dessert } = Util.hasMenuInCategory(order.menu);
 
-      return this.calculateCategoryDiscount(order, dessert, discount);
+      return this.calculateCategoryDiscount(order.quantity, dessert, discount);
     }, 0) * (-1);
   }
 
-  calculateWeekend(date, orders) {
+  calculateWeekend(date, orders, price) {
     const orderDate = new Date(DATE.year, DATE.month - 1, date);
     const day = orderDate.getDay();
     
-    if (!WEEKEND.includes(day)) return 0;
-    
+    if (price < PRICE.for_benefit || !WEEKEND.includes(day)) {
+      return 0;
+    }
+
     return orders.reduce((discount, order) => {
       const { main } = Util.hasMenuInCategory(order.menu);
 
-      return this.calculateCategoryDiscount(order, main, discount);
+      return this.calculateCategoryDiscount(order.quantity, main, discount);
     }, 0) * (-1);
   }
 
-  calculateSpecialDay(date) {
+  calculateSpecialDay(date, price) {
     const isSpecial = SPECIAL_DAY.includes(date);
 
-    if (isSpecial) {
+    if (isSpecial && price >= PRICE.for_benefit) {
       return PRICE.for_special * (-1);
     }
 
@@ -66,7 +70,9 @@ class Promotion {
   }
 
   calculateGiftPrice(price) {
-    if (price > PRICE.for_gift) {
+    const gift = this.calculateGiftEvent(price);
+
+    if (gift) {
       return BEVERAGE.champagne.price * (-1);
     }
 
@@ -90,9 +96,9 @@ class Promotion {
 
   calculateAllBenefits(price, date, menu) {
     const dDay = this.calculateDDay(price, date);
-    const weekday = this.calculateWeekday(date, menu);
-    const weekend = this.calculateWeekend(date, menu);
-    const special = this.calculateSpecialDay(date);
+    const weekday = this.calculateWeekday(date, menu, price);
+    const weekend = this.calculateWeekend(date, menu, price);
+    const special = this.calculateSpecialDay(date, price);
     const gift = this.calculateGiftPrice(price);
     const totalBenefit = this.calculateTotalBenefit(dDay, weekday, weekend, special, gift);
 
