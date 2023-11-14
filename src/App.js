@@ -3,10 +3,11 @@ import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import Order from './domain/Order.js';
 import Promotion from './domain/Promotion.js';
+import GiftEvent from './domain/GiftEvent.js';
+import BadgeEvent from './domain/BadgeEvent.js';
 
 class App {
   #order;
-  #promotion;
 
   async run() {
     await this.readOrder();
@@ -34,10 +35,8 @@ class App {
   }
 
   printGiftList() {
-    this.#promotion = new Promotion();
-
     const price = this.#order.calculateTotalPrice();
-    const isOverPrice = this.#promotion.calculateGiftEvent(price);
+    const isOverPrice = GiftEvent.isOverPrice(price);
     
     OutputView.printGiftMenu(isOverPrice);
   }
@@ -46,14 +45,14 @@ class App {
     const price = this.#order.calculateTotalPrice();
     const { 
       dDay, weekday, weekend, special, gift
-    } = this.#promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
+    } = Promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
     
     OutputView.printAllBenefit(dDay, weekday, weekend, special, gift);
   }
   
   printTotalPrice() {
     const price = this.#order.calculateTotalPrice();
-    const { totalBenefit } = this.#promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
+    const { totalBenefit } = Promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
     const expectedAmount = this.#order.calculateExpectedAmount(totalBenefit);
     
     OutputView.printBenefitPrice(totalBenefit);
@@ -62,8 +61,8 @@ class App {
   
   printEventBadge() {
     const price = this.#order.calculateTotalPrice();
-    const { totalBenefit } = this.#promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
-    const badge = this.#promotion.calculateEventBadge(totalBenefit);
+    const { totalBenefit } = Promotion.calculateAllBenefits(price, this.#order.date, this.#order.menu);
+    const badge = BadgeEvent.calculate(totalBenefit);
 
     OutputView.printBadge(badge);
   }
